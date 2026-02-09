@@ -17,13 +17,13 @@
 
 **Purpose**: Symfony project initialization and tooling configuration
 
-- [ ] T001 Initialize Symfony 7.2 project with `symfony new` and install core dependencies (symfony/security-bundle, doctrine/orm, doctrine/doctrine-bundle, symfony/form, symfony/validator, symfony/twig-bundle, symfony/asset) via Composer
-- [ ] T002 Install dev dependencies: symfony/test-pack, dama/doctrine-test-bundle, phpstan/phpstan, friendsofphp/php-cs-fixer
-- [ ] T003 [P] Configure SQLite database connection in .env (`DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"`)
-- [ ] T004 [P] Configure PHP-CS-Fixer with PSR-12 profile in .php-cs-fixer.dist.php
-- [ ] T005 [P] Configure PHPStan at level 6 in phpstan.neon
-- [ ] T006 [P] Configure DAMA DoctrineTestBundle in phpunit.xml.dist for test transaction isolation
-- [ ] T007 Create base Twig layout in templates/base.html.twig with navigation (Register, Login, Users, Profile, Followers, Following, Pending Requests, Logout)
+- [x] T001 Initialize Symfony 7.2 project with `symfony new` and install core dependencies (symfony/security-bundle, doctrine/orm, doctrine/doctrine-bundle, symfony/form, symfony/validator, symfony/twig-bundle, symfony/asset) via Composer
+- [x] T002 Install dev dependencies: symfony/test-pack, dama/doctrine-test-bundle, phpstan/phpstan, friendsofphp/php-cs-fixer
+- [x] T003 [P] Configure SQLite database connection in .env (`DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"`)
+- [x] T004 [P] Configure PHP-CS-Fixer with PSR-12 profile in .php-cs-fixer.dist.php
+- [x] T005 [P] Configure PHPStan at level 6 in phpstan.neon
+- [x] T006 [P] Configure DAMA DoctrineTestBundle in phpunit.xml.dist for test transaction isolation
+- [x] T007 Create base Twig layout in templates/base.html.twig with navigation (Register, Login, Users, Profile, Followers, Following, Pending Requests, Logout)
 
 ---
 
@@ -33,16 +33,16 @@
 
 **CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T008 Create User entity implementing UserInterface and PasswordAuthenticatedUserInterface in src/Entity/User.php with fields: id, email (unique, 180 chars), password, roles (json), registeredAt (datetime)
-- [ ] T009 Create Profile entity in src/Entity/Profile.php with fields: id, displayName (string 50), bio (text nullable), photoFilename (string 255 nullable), wizardCompleted (boolean default false), user (OneToOne with User, cascade remove)
-- [ ] T010 Create FollowRequest entity in src/Entity/FollowRequest.php with fields: id, requester (ManyToOne User), target (ManyToOne User), status (string 10: pending/approved/rejected), requestedAt (datetime), resolvedAt (datetime nullable)
-- [ ] T011 [P] Create UserRepository in src/Repository/UserRepository.php extending ServiceEntityRepository
-- [ ] T012 [P] Create ProfileRepository in src/Repository/ProfileRepository.php extending ServiceEntityRepository
-- [ ] T013 [P] Create FollowRequestRepository in src/Repository/FollowRequestRepository.php extending ServiceEntityRepository
-- [ ] T014 Generate and run initial Doctrine migration for all three entities via `php bin/console make:migration` and `php bin/console doctrine:migrations:migrate`
-- [ ] T015 Configure security.yaml: password hasher (auto), entity user provider (email property), form_login firewall, logout path, access_control rules (anon for /register and /login, ROLE_USER for everything else)
-- [ ] T016 [P] Install and configure vich/uploader-bundle in config/packages/vich_uploader.yaml with profile_photos mapping pointing to public/uploads/photos
-- [ ] T017 [P] Install and configure knplabs/knp-paginator-bundle in config/packages/knp_paginator.yaml
+- [x] T008 Create User entity implementing UserInterface and PasswordAuthenticatedUserInterface in src/Entity/User.php with fields: id, email (unique, 180 chars), password, roles (json), registeredAt (datetime)
+- [x] T009 Create Profile entity in src/Entity/Profile.php with fields: id, displayName (string 50), bio (text nullable), photoFilename (string 255 nullable), wizardCompleted (boolean default false), user (OneToOne with User, cascade remove)
+- [x] T010 Create FollowRequest entity in src/Entity/FollowRequest.php with fields: id, requester (ManyToOne User), target (ManyToOne User), status (string 10: pending/approved/rejected), requestedAt (datetime), resolvedAt (datetime nullable)
+- [x] T011 [P] Create UserRepository in src/Repository/UserRepository.php extending ServiceEntityRepository
+- [x] T012 [P] Create ProfileRepository in src/Repository/ProfileRepository.php extending ServiceEntityRepository
+- [x] T013 [P] Create FollowRequestRepository in src/Repository/FollowRequestRepository.php extending ServiceEntityRepository
+- [x] T014 Generate and run initial Doctrine migration for all three entities via `php bin/console make:migration` and `php bin/console doctrine:migrations:migrate`
+- [x] T015 Configure security.yaml: password hasher (auto), entity user provider (email property), form_login firewall, logout path, access_control rules (anon for /register and /login, ROLE_USER for everything else)
+- [x] T016 [P] Install and configure vich/uploader-bundle in config/packages/vich_uploader.yaml with profile_photos mapping pointing to public/uploads/photos
+- [x] T017 [P] Install and configure knplabs/knp-paginator-bundle in config/packages/knp_paginator.yaml
 
 **Checkpoint**: Foundation ready — entities, security, and infrastructure configured. User story implementation can now begin.
 
@@ -58,18 +58,18 @@
 
 > **Write these tests FIRST. Ensure they FAIL before implementation.**
 
-- [ ] T018 [P] [US1] Write entity unit test in tests/Entity/UserTest.php: test email/password getters/setters, roles default to ROLE_USER, registeredAt is set
-- [ ] T019 [P] [US1] Write controller test in tests/Controller/RegistrationControllerTest.php: test GET /register renders form, POST with valid data creates user and redirects, POST with duplicate email shows error, POST with short password shows validation error
-- [ ] T020 [P] [US1] Write controller test in tests/Controller/SecurityControllerTest.php: test GET /login renders form, successful login redirects, invalid credentials show error, logout works
+- [x] T018 [P] [US1] Write entity unit test in tests/Entity/UserTest.php: test email/password getters/setters, roles default to ROLE_USER, registeredAt is set
+- [x] T019 [P] [US1] Write controller test in tests/Controller/RegistrationControllerTest.php: test GET /register renders form, POST with valid data creates user and redirects, POST with duplicate email shows error, POST with short password shows validation error
+- [x] T020 [P] [US1] Write controller test in tests/Controller/SecurityControllerTest.php: test GET /login renders form, successful login redirects, invalid credentials show error, logout works
 
 ### Implementation for User Story 1
 
-- [ ] T021 [US1] Create RegistrationType form class in src/Form/RegistrationType.php with email (EmailType) and plainPassword (PasswordType, min 8 chars) fields
-- [ ] T022 [US1] Create RegistrationController in src/Controller/RegistrationController.php with index action: render form on GET, validate+hash password+persist user+create empty Profile on POST, redirect to /profile/wizard
-- [ ] T023 [US1] Create registration template in templates/registration/register.html.twig with form rendering and error display
-- [ ] T024 [US1] Create SecurityController in src/Controller/SecurityController.php with login action (render form + getLastAuthenticationError) and logout action (empty, handled by firewall)
-- [ ] T025 [US1] Create login template in templates/security/login.html.twig with email/password form and error display
-- [ ] T026 [US1] Verify all US1 tests pass (run `php bin/phpunit tests/Controller/RegistrationControllerTest.php tests/Controller/SecurityControllerTest.php tests/Entity/UserTest.php`)
+- [x] T021 [US1] Create RegistrationType form class in src/Form/RegistrationType.php with email (EmailType) and plainPassword (PasswordType, min 8 chars) fields
+- [x] T022 [US1] Create RegistrationController in src/Controller/RegistrationController.php with index action: render form on GET, validate+hash password+persist user+create empty Profile on POST, redirect to /profile/wizard
+- [x] T023 [US1] Create registration template in templates/registration/register.html.twig with form rendering and error display
+- [x] T024 [US1] Create SecurityController in src/Controller/SecurityController.php with login action (render form + getLastAuthenticationError) and logout action (empty, handled by firewall)
+- [x] T025 [US1] Create login template in templates/security/login.html.twig with email/password form and error display
+- [x] T026 [US1] Verify all US1 tests pass (run `php bin/phpunit tests/Controller/RegistrationControllerTest.php tests/Controller/SecurityControllerTest.php tests/Entity/UserTest.php`)
 
 **Checkpoint**: Users can register, log in, and log out. MVP functional.
 
@@ -85,19 +85,19 @@
 
 > **Write these tests FIRST. Ensure they FAIL before implementation.**
 
-- [ ] T027 [P] [US2] Write entity unit test in tests/Entity/ProfileTest.php: test displayName/bio/photoFilename getters/setters, wizardCompleted default false, user relationship
-- [ ] T028 [P] [US2] Write controller test in tests/Controller/ProfileControllerTest.php: test wizard redirects for new user, wizard saves profile data, wizard handles photo skip (default avatar), edit form loads with existing data, edit form saves changes, show action displays public profile
+- [x] T027 [P] [US2] Write entity unit test in tests/Entity/ProfileTest.php: test displayName/bio/photoFilename getters/setters, wizardCompleted default false, user relationship
+- [x] T028 [P] [US2] Write controller test in tests/Controller/ProfileControllerTest.php: test wizard redirects for new user, wizard saves profile data, wizard handles photo skip (default avatar), edit form loads with existing data, edit form saves changes, show action displays public profile
 
 ### Implementation for User Story 2
 
-- [ ] T029 [US2] Create ProfileWizardType form class in src/Form/ProfileWizardType.php with displayName (TextType, 2-50 chars), bio (TextareaType, max 500, not required), photoFile (VichFileType, not required)
-- [ ] T030 [US2] Create ProfileEditType form class in src/Form/ProfileEditType.php (same fields as wizard, reusable for edit)
-- [ ] T031 [US2] Create EventSubscriber in src/EventSubscriber/ProfileWizardSubscriber.php that listens to kernel.request: if authenticated user has Profile with wizardCompleted=false, redirect to /profile/wizard (except if already on /profile/wizard or /logout)
-- [ ] T032 [US2] Create ProfileController in src/Controller/ProfileController.php with: wizard action (GET renders form, POST saves profile + sets wizardCompleted=true + redirects to /users), edit action (GET/POST for updating profile), show action (GET /profile/{id} displays public profile with display name, bio, photo)
-- [ ] T033 [US2] Create wizard template in templates/profile/wizard.html.twig with form fields and skip option for photo
-- [ ] T034 [P] [US2] Create edit template in templates/profile/edit.html.twig with form fields for updating profile
-- [ ] T035 [P] [US2] Create show template in templates/profile/show.html.twig displaying display name, bio, photo (or default avatar if null)
-- [ ] T036 [US2] Verify all US2 tests pass (run `php bin/phpunit tests/Entity/ProfileTest.php tests/Controller/ProfileControllerTest.php`)
+- [x] T029 [US2] Create ProfileWizardType form class in src/Form/ProfileWizardType.php with displayName (TextType, 2-50 chars), bio (TextareaType, max 500, not required), photoFile (VichFileType, not required)
+- [x] T030 [US2] Create ProfileEditType form class in src/Form/ProfileEditType.php (same fields as wizard, reusable for edit)
+- [x] T031 [US2] Create EventSubscriber in src/EventSubscriber/ProfileWizardSubscriber.php that listens to kernel.request: if authenticated user has Profile with wizardCompleted=false, redirect to /profile/wizard (except if already on /profile/wizard or /logout)
+- [x] T032 [US2] Create ProfileController in src/Controller/ProfileController.php with: wizard action (GET renders form, POST saves profile + sets wizardCompleted=true + redirects to /users), edit action (GET/POST for updating profile), show action (GET /profile/{id} displays public profile with display name, bio, photo)
+- [x] T033 [US2] Create wizard template in templates/profile/wizard.html.twig with form fields and skip option for photo
+- [x] T034 [P] [US2] Create edit template in templates/profile/edit.html.twig with form fields for updating profile
+- [x] T035 [P] [US2] Create show template in templates/profile/show.html.twig displaying display name, bio, photo (or default avatar if null)
+- [x] T036 [US2] Verify all US2 tests pass (run `php bin/phpunit tests/Entity/ProfileTest.php tests/Controller/ProfileControllerTest.php`)
 
 **Checkpoint**: Users can complete the profile wizard and edit their profile. Profile pages display correctly with default avatars.
 
@@ -113,15 +113,15 @@
 
 > **Write these tests FIRST. Ensure they FAIL before implementation.**
 
-- [ ] T037 [P] [US3] Write repository test in tests/Repository/UserRepositoryTest.php: test query that returns paginated users excluding current user, test search filtering by display name (case-insensitive substring match)
-- [ ] T038 [P] [US3] Write controller test in tests/Controller/UserControllerTest.php: test GET /users returns paginated list, test search query parameter filters results, test pagination with page parameter, test unauthenticated access redirects to login
+- [x] T037 [P] [US3] Write repository test in tests/Repository/UserRepositoryTest.php: test query that returns paginated users excluding current user, test search filtering by display name (case-insensitive substring match)
+- [x] T038 [P] [US3] Write controller test in tests/Controller/UserControllerTest.php: test GET /users returns paginated list, test search query parameter filters results, test pagination with page parameter, test unauthenticated access redirects to login
 
 ### Implementation for User Story 3
 
-- [ ] T039 [US3] Add method to ProfileRepository: findPaginatableQueryExcludingUser(User $excludeUser, ?string $searchQuery) returning a QueryBuilder for KnpPaginator in src/Repository/ProfileRepository.php
-- [ ] T040 [US3] Create UserController in src/Controller/UserController.php with directory action: inject PaginatorInterface, query ProfileRepository excluding current user, apply search filter from ?q parameter, paginate at 20 per page
-- [ ] T041 [US3] Create directory template in templates/user/directory.html.twig with search input, user cards (photo, display name, bio excerpt), and KnpPaginator pagination controls
-- [ ] T042 [US3] Verify all US3 tests pass (run `php bin/phpunit tests/Repository/UserRepositoryTest.php tests/Controller/UserControllerTest.php`)
+- [x] T039 [US3] Add method to ProfileRepository: findPaginatableQueryExcludingUser(User $excludeUser, ?string $searchQuery) returning a QueryBuilder for KnpPaginator in src/Repository/ProfileRepository.php
+- [x] T040 [US3] Create UserController in src/Controller/UserController.php with directory action: inject PaginatorInterface, query ProfileRepository excluding current user, apply search filter from ?q parameter, paginate at 20 per page
+- [x] T041 [US3] Create directory template in templates/user/directory.html.twig with search input, user cards (photo, display name, bio excerpt), and KnpPaginator pagination controls
+- [x] T042 [US3] Verify all US3 tests pass (run `php bin/phpunit tests/Repository/UserRepositoryTest.php tests/Controller/UserControllerTest.php`)
 
 **Checkpoint**: User directory is fully functional with search and pagination.
 
@@ -137,21 +137,21 @@
 
 > **Write these tests FIRST. Ensure they FAIL before implementation.**
 
-- [ ] T043 [P] [US4] Write entity unit test in tests/Entity/FollowRequestTest.php: test requester/target/status getters/setters, requestedAt set on creation, resolvedAt nullable, status transitions (pending→approved, pending→rejected)
-- [ ] T044 [P] [US4] Write repository test in tests/Repository/FollowRequestRepositoryTest.php: test findPendingRequestsForUser, test findFollowersForUser (status=approved), test findFollowingForUser (status=approved), test findPendingBetween(requester, target), test self-follow prevention
-- [ ] T045 [P] [US4] Write controller test in tests/Controller/FollowControllerTest.php: test POST /follow/{id} creates pending request, test POST /follow/{id} for self returns error, test duplicate pending request shows info message, test GET /follow-requests lists pending requests, test POST approve changes status to approved, test POST reject deletes request, test POST /unfollow deletes approved request, test GET /followers lists approved followers, test GET /following lists approved following
+- [x] T043 [P] [US4] Write entity unit test in tests/Entity/FollowRequestTest.php: test requester/target/status getters/setters, requestedAt set on creation, resolvedAt nullable, status transitions (pending→approved, pending→rejected)
+- [x] T044 [P] [US4] Write repository test in tests/Repository/FollowRequestRepositoryTest.php: test findPendingRequestsForUser, test findFollowersForUser (status=approved), test findFollowingForUser (status=approved), test findPendingBetween(requester, target), test self-follow prevention
+- [x] T045 [P] [US4] Write controller test in tests/Controller/FollowControllerTest.php: test POST /follow/{id} creates pending request, test POST /follow/{id} for self returns error, test duplicate pending request shows info message, test GET /follow-requests lists pending requests, test POST approve changes status to approved, test POST reject deletes request, test POST /unfollow deletes approved request, test GET /followers lists approved followers, test GET /following lists approved following
 
 ### Implementation for User Story 4
 
-- [ ] T046 [US4] Add repository methods to FollowRequestRepository in src/Repository/FollowRequestRepository.php: findPendingForTarget(User), findFollowers(User), findFollowing(User), findPendingBetween(User requester, User target), countPendingForTarget(User)
-- [ ] T047 [US4] Create FollowController in src/Controller/FollowController.php with actions: request (POST /follow/{userId} — validate not self, not duplicate pending, create FollowRequest with status=pending), approve (POST /follow-requests/{id}/approve — set status=approved, set resolvedAt), reject (POST /follow-requests/{id}/reject — delete the request record), unfollow (POST /unfollow/{userId} — delete approved FollowRequest), pendingList (GET /follow-requests), followers (GET /followers), following (GET /following)
-- [ ] T048 [US4] Create pending requests template in templates/follow/pending.html.twig with requester photo, display name, and Approve/Reject buttons
-- [ ] T049 [P] [US4] Create followers template in templates/follow/followers.html.twig listing followers with photo, display name, link to profile
-- [ ] T050 [P] [US4] Create following template in templates/follow/following.html.twig listing followed users with photo, display name, Unfollow button
-- [ ] T051 [US4] Update templates/profile/show.html.twig to show Follow/Pending/Unfollow button based on current relationship status (hide on own profile per FR-012)
-- [ ] T052 [US4] Update templates/user/directory.html.twig to show follow status indicator on each user card
-- [ ] T053 [US4] Add pending follow request count badge to navigation in templates/base.html.twig
-- [ ] T054 [US4] Verify all US4 tests pass (run `php bin/phpunit tests/Entity/FollowRequestTest.php tests/Repository/FollowRequestRepositoryTest.php tests/Controller/FollowControllerTest.php`)
+- [x] T046 [US4] Add repository methods to FollowRequestRepository in src/Repository/FollowRequestRepository.php: findPendingForTarget(User), findFollowers(User), findFollowing(User), findPendingBetween(User requester, User target), countPendingForTarget(User)
+- [x] T047 [US4] Create FollowController in src/Controller/FollowController.php with actions: request (POST /follow/{userId} — validate not self, not duplicate pending, create FollowRequest with status=pending), approve (POST /follow-requests/{id}/approve — set status=approved, set resolvedAt), reject (POST /follow-requests/{id}/reject — delete the request record), unfollow (POST /unfollow/{userId} — delete approved FollowRequest), pendingList (GET /follow-requests), followers (GET /followers), following (GET /following)
+- [x] T048 [US4] Create pending requests template in templates/follow/pending.html.twig with requester photo, display name, and Approve/Reject buttons
+- [x] T049 [P] [US4] Create followers template in templates/follow/followers.html.twig listing followers with photo, display name, link to profile
+- [x] T050 [P] [US4] Create following template in templates/follow/following.html.twig listing followed users with photo, display name, Unfollow button
+- [x] T051 [US4] Update templates/profile/show.html.twig to show Follow/Pending/Unfollow button based on current relationship status (hide on own profile per FR-012)
+- [x] T052 [US4] Update templates/user/directory.html.twig to show follow status indicator on each user card
+- [x] T053 [US4] Add pending follow request count badge to navigation in templates/base.html.twig
+- [x] T054 [US4] Verify all US4 tests pass (run `php bin/phpunit tests/Entity/FollowRequestTest.php tests/Repository/FollowRequestRepositoryTest.php tests/Controller/FollowControllerTest.php`)
 
 **Checkpoint**: Complete follow system functional — send, approve, reject, unfollow, follower/following lists.
 
@@ -161,11 +161,11 @@
 
 **Purpose**: Quality gates, cleanup, and final validation
 
-- [ ] T055 [P] Run PHP-CS-Fixer on entire src/ and tests/ directories and fix all violations
-- [ ] T056 [P] Run PHPStan level 6 on src/ and fix all reported errors
-- [ ] T057 Run full test suite (`php bin/phpunit`) and verify all tests pass
-- [ ] T058 [P] Verify quickstart.md instructions work end-to-end on a clean checkout
-- [ ] T059 Generate final Doctrine migration if any entity changes occurred during implementation
+- [x] T055 [P] Run PHP-CS-Fixer on entire src/ and tests/ directories and fix all violations
+- [x] T056 [P] Run PHPStan level 6 on src/ and fix all reported errors
+- [x] T057 Run full test suite (`php bin/phpunit`) and verify all tests pass
+- [x] T058 [P] Verify quickstart.md instructions work end-to-end on a clean checkout
+- [x] T059 Generate final Doctrine migration if any entity changes occurred during implementation
 
 ---
 

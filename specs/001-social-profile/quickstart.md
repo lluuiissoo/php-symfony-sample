@@ -20,8 +20,7 @@ git checkout 001-social-profile
 # Install dependencies
 composer install
 
-# Create database and run migrations
-php bin/console doctrine:database:create
+# Run migrations (creates SQLite database automatically)
 php bin/console doctrine:migrations:migrate --no-interaction
 
 # Create upload directory for profile photos

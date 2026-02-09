@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Following{% endblock %}
+
+{% block body %}
+    <h1>People You Follow</h1>
+
+    {% for followRequest in following %}
+        {% set followedProfile = followRequest.target.profile %}
+        <div class="card" style="display: flex; gap: 15px; align-items: center;">
+            {% if followedProfile and followedProfile.photoFilename %}
+                <img src="/uploads/photos/{{ followedProfile.photoFilename }}" class="avatar" alt="{{ followedProfile.displayName }}">
+            {% else %}
+                <div class="avatar" style="display: flex; align-items: center; justify-content: center; font-size: 20px; color: #666;">?</div>
+            {% endif %}
+            <div style="flex: 1;">
+                <a href="{{ path('app_profile_show', {id: followRequest.target.id}) }}">
+                    <strong>{{ followedProfile ? followedProfile.displayName : followRequest.target.email }}</strong>
+                </a>
+            </div>
+            <form method="post" action="{{ path('app_unfollow', {userId: followRequest.target.id}) }}">
+                <button type="submit" class="btn btn-danger">Unfollow</button>
+            </form>
+        </div>
+    {% else %}
+        <p>You're not following anyone yet.</p>
+    {% endfor %}
+{% endblock %}

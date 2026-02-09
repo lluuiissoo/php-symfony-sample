@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Complete Your Profile{% endblock %}
+
+{% block body %}
+    <h1>Complete Your Profile</h1>
+    <p>Tell us about yourself so others can find you.</p>
+
+    {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.displayName) }}
+            {{ form_widget(form.displayName) }}
+            {{ form_errors(form.displayName) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.bio) }}
+            {{ form_widget(form.bio) }}
+            {{ form_errors(form.bio) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.photoFile) }}
+            {{ form_widget(form.photoFile) }}
+            {{ form_errors(form.photoFile) }}
+            <small>Optional. JPEG or PNG, max 2 MB.</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Complete Profile</button>
+    {{ form_end(form) }}
+{% endblock %}

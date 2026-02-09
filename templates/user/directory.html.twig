@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+    <h1>User Directory</h1>
+
+    <form method="get" action="{{ path('app_users') }}" style="margin-bottom: 20px;">
+        <div style="display: flex; gap: 10px;">
+            <input type="text" name="q" value="{{ searchQuery }}" placeholder="Search by name..." style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+            <button type="submit" class="btn btn-primary">Search</button>
+            {% if searchQuery %}
+                <a href="{{ path('app_users') }}" class="btn btn-secondary">Clear</a>
+            {% endif %}
+        </div>
+    </form>
+
+    {% for profile in pagination %}
+        <div class="card" style="display: flex; gap: 15px; align-items: center;">
+            {% if profile.photoFilename %}
+                <img src="/uploads/photos/{{ profile.photoFilename }}" class="avatar" alt="{{ profile.displayName }}">
+            {% else %}
+                <div class="avatar" style="display: flex; align-items: center; justify-content: center; font-size: 20px; color: #666;">?</div>
+            {% endif %}
+            <div style="flex: 1;">
+                <a href="{{ path('app_profile_show', {id: profile.user.id}) }}"><strong>{{ profile.displayName }}</strong></a>
+                {% if profile.bio %}
+                    <p style="margin: 5px 0 0; color: #666;">{{ profile.bio|length > 100 ? profile.bio|slice(0, 100) ~ '...' : profile.bio }}</p>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <p>No users found{% if searchQuery %} matching "{{ searchQuery }}"{% endif %}.</p>
+    {% endfor %}
+
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}
